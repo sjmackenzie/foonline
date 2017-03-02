@@ -1,25 +1,30 @@
 #canvas {
+    border: 1px solid;
+    border-radius: 0.5em;
     display: inline-block;
-    padding: 1em;
+    height:99vh;
     width: 50%;
-}
-
-textarea {
-    width: 100%;
-    resize: none;
 }
 
 #input {
     border-radius: 0.5em;
     border: 1px solid;
+    font: monospace;
+    font-size: 200%;
+    resize: none;
+    width: 100%;
 }
 
 #output {
     border: none;    
+    font: monospace;
+    resize: none;
+    width: 100%;
 }
 
 #repl {
     display: inline-block;
-    padding: 1em;
-    width: 50%;
+    height:99vh;
+    width: 49%;
+    vertical-align: top;
 }

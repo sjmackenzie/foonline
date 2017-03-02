@@ -21,6 +21,9 @@
 
     (html-link doc :rel :stylesheet
                    :type :text/css
+                   :href "reset.css")
+    (html-link doc :rel :stylesheet
+                   :type :text/css
                    :href "foonline.css")
     
     (let* ((repl (html-div body :id :repl))
