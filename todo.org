@@ -1,0 +1,10 @@
+* set page title
+* add input, textarea and div to interface
+* add css file with styles
+* add lifoo exec
+** one exec per document
+** register :doc/:canvas/:exec variables
+* implement repl
+** insert lines from top on enter
+** empty field on enter
+** enter in empty field to eval
