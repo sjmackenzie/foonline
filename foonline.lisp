@@ -1,11 +1,11 @@
-(defpackage lifoonline
-  (:export start-lifoonline stop-lifoonline)
+(defpackage foonline
+  (:export start-foonline stop-foonline)
   (:use cl cl4l-html cl4l-utils lifoo))
 
-(in-package lifoonline)
+(in-package foonline)
 
 (defparameter *port* 8080)
-(defparameter *root* "~/Andreas/Dev/Lisp/lifoonline/www/")
+(defparameter *root* "~/Andreas/Dev/Lisp/foonline/www/")
 
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
@@ -44,12 +44,12 @@
     (setf (hunchentoot:content-type*) "application/javascript")
     (html-update-script doc)))
 
-(defun start-lifoonline ()
+(defun start-foonline ()
   (setf *server*
         (hunchentoot:start
          (make-instance 'hunchentoot:easy-acceptor
                         :port *port*
                         :document-root *root*))))
 
-(defun stop-lifoonline ()
+(defun stop-foonline ()
   (hunchentoot:stop *server*))

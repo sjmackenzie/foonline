@@ -1,7 +1,7 @@
-(asdf:defsystem lifoonline
+(asdf:defsystem foonline
   :description "Lifoo online"
   :author "Andreas <codr4life@gmail.com>"
   :license "MIT"
   :depends-on (:hunchentoot :lifoo)
   :serial t
-  :components ((:file "lifoonline")))
+  :components ((:file "foonline")))
