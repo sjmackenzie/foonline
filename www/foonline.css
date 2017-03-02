@@ -3,6 +3,7 @@
     border-radius: 0.5em;
     display: inline-block;
     height:99vh;
+    overflow: scroll;
     width: 50%;
 }
 
