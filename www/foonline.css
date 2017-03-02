@@ -1,0 +1,25 @@
+#canvas {
+    display: inline-block;
+    padding: 1em;
+    width: 50%;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+}
+
+#input {
+    border-radius: 0.5em;
+    border: 1px solid;
+}
+
+#output {
+    border: none;    
+}
+
+#repl {
+    display: inline-block;
+    padding: 1em;
+    width: 50%;
+}

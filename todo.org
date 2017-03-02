@@ -1,8 +1,8 @@
-* set page title
-* add textareas and div to interface
-* add css file with styles
-* add support for onkeydown
-** how to transport key/altKey/ctrlKey/shiftKey?
+* add exec with eval
+** one exec per doc
+** use ctrl+enter to eval
+** insert expr in top of output
+** use lifoo-print to print result
 * add lifoo exec
 ** one exec per document
 ** register :doc/:canvas/:exec variables

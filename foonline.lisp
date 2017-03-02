@@ -10,23 +10,28 @@
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
 
-(hunchentoot:define-easy-handler (demo :uri "/demo") ()
-  (let* ((doc (html-doc :dynamic? t :call-url "cl4l"))
-         (body (html-body doc))
-         (input (html-input body :type :text)))
+(hunchentoot:define-easy-handler (demo :uri "/") ()
+  (let* ((doc (html-doc :title "foonline"
+                        :dynamic? t
+                        :call-url "cl4l"))
+         (body (html-body doc)))
 
     (html-script doc :src "jquery.js")
     (html-script doc :src "cl4l.js")
 
-    (html-button body
-                 :body "Greet"
-                 :onclick
-                 (lambda ()
-                   (html body (format nil "Hello ~a!"
-                                      (html-attr input :value)))
-                   (html-br body)))
+    (html-link doc :rel :stylesheet
+                   :type :text/css
+                   :href "foonline.css")
     
-    (html-br body)
+    (let* ((repl (html-div body :id :repl))
+           (input (html-textarea repl :id :input))
+           (output (html-textarea (html-br repl) :id :output)))
+      (setf
+       (html-attr input :rows) 5
+       (html-attr output :readonly) t))
+
+    (let ((canvas (html-div body :id :canvas)))
+      (declare (ignore canvas)))
     
     (setf (gethash (html-doc-id doc) *docs*) doc)
     (setf (hunchentoot:content-type*) "text/html")
