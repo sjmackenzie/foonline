@@ -1,3 +1,5 @@
+* add error-handler around eval
+** append error to output
 * fix support for multi-line input
 canvas 
 10 (1 list str swap button rotr html drop) 
