@@ -5,7 +5,7 @@ body {
 #canvas {
     border: none;
     display: inline-block;
-    height:98vh;
+    height:96vh;
     overflow: scroll;
     width: 49%;
 }
@@ -35,7 +35,7 @@ body {
 
 #repl {
     display: inline-block;
-    height: 99vh;
+    height: 96vh;
     margin-right: 1%;
     width: 49%;
     vertical-align: top;
