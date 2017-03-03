@@ -1,3 +1,7 @@
+* fix support for multi-line input
+canvas 
+10 (1 list str swap button rotr html drop) 
+times
 * add undo support
 ** run each command in trans
 ** store trans on commit
