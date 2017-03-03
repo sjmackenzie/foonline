@@ -31,8 +31,16 @@
            (output (html-textarea (html-br repl) :id :output)))
       (setf
        (html-attr input :rows) 5
-       (html-attr output :readonly) t))
-
+       (html-attr output :readonly) t)
+      (html-onkeydown
+       input
+       (lambda ()
+         (when (and
+                (string= "true" (html-param :cl4l-ctrl-key))
+                (string= "13" (html-param :cl4l-key)))
+           (format t "eval!~%")
+           (drop-html-event doc)))))
+    
     (let ((canvas (html-div body :id :canvas)))
       (declare (ignore canvas)))
     
