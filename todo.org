@@ -9,6 +9,7 @@
 * add Linux exec
 ** add support for specifying port on command line
 *** sb-ext:*posix-argv*
+** include www in archive
 canvas 
 10 (1 list str swap button rotr html drop) 
 times
