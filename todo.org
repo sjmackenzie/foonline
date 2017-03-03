@@ -1,5 +1,3 @@
-* define words for :doc/:canvas/:exec/:in/:out
-** try output empty
 * add undo support
 ** run each command in trans
 ** store trans on commit

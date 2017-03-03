@@ -27,12 +27,25 @@
                    :type :text/css
                    :href "foonline.css")
     
+    (define-lisp-word :doc () (:exec exec)
+      (lifoo-push doc))
+
+    (define-lisp-word :exec () (:exec exec)
+      (lifoo-push exec))
+
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
            (output (html-textarea (html-br repl) :id :output)))
+      (define-lisp-word :in () (:exec exec)
+        (lifoo-push input))
+      
+      (define-lisp-word :out () (:exec exec)
+        (lifoo-push output))
+      
       (setf
        (html-attr input :rows) 5
        (html-attr output :readonly) t)
+
       (html output "Welcome to Foonline,")
       (html output "press Ctrl+Enter to evaluate")
       (html output "")
@@ -58,7 +71,8 @@
            (drop-html-event doc)))))
     
     (let ((canvas (html-div body :id :canvas)))
-      (declare (ignore canvas)))
+      (define-lisp-word :canvas () (:exec exec)
+        (lifoo-push canvas)))
     
     (setf (gethash (html-doc-id doc) *docs*) doc)
     (setf (hunchentoot:content-type*) "text/html")
