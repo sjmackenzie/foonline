@@ -59,7 +59,8 @@
              (with-input-from-string (in expr)
                (let ((line))
                  (do-while ((setf line (read-line in nil)))
-                   (html output (format nil "~a\\n" line)))))
+                   (html output (format nil "~a\\n" line)))
+                 (html output "\\n")))
              
              (with-input-from-string (in expr)
                (lifoo-eval (lifoo-read :in in) :exec exec)))
