@@ -30,9 +30,6 @@
     (define-lisp-word :doc () (:exec exec)
       (lifoo-push doc))
 
-    (define-lisp-word :exec () (:exec exec)
-      (lifoo-push exec))
-
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
            (output (html-textarea (html-br repl) :id :output)))
