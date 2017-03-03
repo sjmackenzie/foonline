@@ -1,9 +1,11 @@
 * add error-handler around eval
 ** append error to output
 * add undo support
-** run each command in trans
-** store trans on commit
-** add undo word to pop
+** add trans support to html protocol
+*** forward lifoo trans to functions
+** run each eval in a separate trans
+** store trans in stack on commit
+** add undo word to pop and roll back
 canvas 
 10 (1 list str swap button rotr html drop) 
 times
