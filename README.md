@@ -11,3 +11,9 @@ Welcome to Foonline, a web-based [Lifoo](https://github.com/codr4life/lifoo) pla
 
 ### basics
 Foonline provides direct real-time access to it's own user interface in the form of a virtual DOM interfaced from [Lifoo](https://github.com/codr4life/lifoo). The way this works is by running [Lifoo](https://github.com/codr4life/lifoo) inside of a Common Lisp server that publishes the same virtual DOM to the browser and [Lifoo](https://github.com/codr4life/lifoo). ```doc``` contains the whole document, ```in``` and ```out``` deal with the REPL text areas; and ```canvas``` the right hand frame. Any method that [Lifoo](https://github.com/codr4life/lifoo) [supports](virtual DOM) for it's virtual DOM may be used to modify the document, the spell for clearing REPL output (```out empty```) may also be used to clear any other HTML element. Each page load starts a new session.
+
+### ps
+You are perfect, immortal spirit; whole and innocent.<br/>
+All is forgiven and released.
+
+peace, out<br/>
