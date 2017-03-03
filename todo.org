@@ -6,6 +6,9 @@
 ** run each eval in a separate trans
 ** store trans in stack on commit
 ** add undo word to pop and roll back
+* add Linux exec
+** add support for specifying port on command line
+*** sb-ext:*posix-argv*
 canvas 
 10 (1 list str swap button rotr html drop) 
 times
