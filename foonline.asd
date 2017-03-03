@@ -1,5 +1,5 @@
 (asdf:defsystem foonline
-  :description "Lifoo online"
+  :description "a web-based Lifoo playground"
   :author "Andreas <codr4life@gmail.com>"
   :license "MIT"
   :depends-on (:hunchentoot :lifoo)
