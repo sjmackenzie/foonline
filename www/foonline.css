@@ -4,14 +4,15 @@
     display: inline-block;
     height:99vh;
     overflow: scroll;
-    width: 50%;
+    width: 49%;
 }
 
 #input {
     border-radius: 0.5em;
     border: 1px solid;
     font: monospace;
-    font-size: 200%;
+    font-size: 150%;
+    height: 30%;
     resize: none;
     width: 100%;
 }
@@ -19,13 +20,15 @@
 #output {
     border: none;    
     font: monospace;
+    height: 70%;
     resize: none;
     width: 100%;
 }
 
 #repl {
     display: inline-block;
-    height:99vh;
+    height: 99vh;
+    margin-right: 1%;
     width: 49%;
     vertical-align: top;
 }

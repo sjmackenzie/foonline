@@ -10,11 +10,12 @@
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
 
-(hunchentoot:define-easy-handler (demo :uri "/") ()
-  (let* ((doc (html-doc :title "foonline"
+(hunchentoot:define-easy-handler (main :uri "/") ()
+  (let* ((doc (html-doc :title "Foonline"
                         :dynamic? t
                         :call-url "cl4l"))
-         (body (html-body doc)))
+         (body (html-body doc))
+         (exec (lifoo-init nil :exec (make-lifoo))))
 
     (html-script doc :src "jquery.js")
     (html-script doc :src "cl4l.js")
@@ -32,13 +33,28 @@
       (setf
        (html-attr input :rows) 5
        (html-attr output :readonly) t)
+      (html output "Welcome to Foonline,")
+      (html output "press Ctrl+Enter to evaluate")
+      (html output "")
+      (html-focus input)
+      
       (html-onkeydown
        input
        (lambda ()
          (when (and
                 (string= "true" (html-param :cl4l-ctrl-key))
                 (string= "13" (html-param :cl4l-key)))
-           (format t "eval!~%")
+           (lifoo-reset :exec exec)
+           (let ((expr (html-value input)))
+             (html output (format nil "~a\\n" expr))
+             (with-input-from-string (in expr)
+               (lifoo-eval (lifoo-read :in in) :exec exec)))
+           (html output
+                 (with-output-to-string (out)
+                   (lifoo-print (lifoo-pop :exec exec) out)
+                   (write-string "\\n\\n" out)))
+           (html-scroll-bottom output)
+           (html-select-all input)
            (drop-html-event doc)))))
     
     (let ((canvas (html-div body :id :canvas)))

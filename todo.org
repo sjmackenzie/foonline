@@ -1,9 +1,5 @@
-* add exec with eval
-** one exec per doc
-** use ctrl+enter to eval
-** append expr in to output
-** use lifoo-print to print result to output
-** register :doc/:canvas/:exec variables
+* define clear word to clear log
+* add let for :doc/:canvas/:exec variables around eval
 * add undo support
 ** run each command in trans
 ** store trans on commit
