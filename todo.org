@@ -1,10 +1,9 @@
 * add error-handler around eval
 ** append error to output
-* fix support for multi-line input
-canvas 
-10 (1 list str swap button rotr html drop) 
-times
 * add undo support
 ** run each command in trans
 ** store trans on commit
 ** add undo word to pop
+canvas 
+10 (1 list str swap button rotr html drop) 
+times

@@ -59,7 +59,11 @@
                 (string= "13" (html-param :cl4l-key)))
            (lifoo-reset :exec exec)
            (let ((expr (html-value input)))
-             (html output (format nil "~a\\n" expr))
+             (with-input-from-string (in expr)
+               (let ((line))
+                 (do-while ((setf line (read-line in nil)))
+                   (html output (format nil "~a\\n" line)))))
+             
              (with-input-from-string (in expr)
                (lifoo-eval (lifoo-read :in in) :exec exec)))
            (html output
