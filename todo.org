@@ -1,13 +1,9 @@
 * add exec with eval
 ** one exec per doc
 ** use ctrl+enter to eval
-** insert expr in top of output
-** use lifoo-print to print result
-* add lifoo exec
-** one exec per document
+** append expr in to output
+** use lifoo-print to print result to output
 ** register :doc/:canvas/:exec variables
-* implement repl
-** insert blocks from top on enter
 * add undo support
 ** run each command in trans
 ** store trans on commit
