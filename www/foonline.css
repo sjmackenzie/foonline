@@ -1,12 +1,11 @@
+body {
+    padding: 1%;
+}
+
 #canvas {
-    border: 1px solid;
-    border-top-color: silver;
-    border-left-color: silver;
-    border-bottom-color: gray;
-    border-right-color: gray;
-    border-radius: 0.5em;
+    border: none;
     display: inline-block;
-    height:99vh;
+    height:98vh;
     overflow: scroll;
     width: 49%;
 }
@@ -38,7 +37,6 @@
     display: inline-block;
     height: 99vh;
     margin-right: 1%;
-    width: 48%;
+    width: 49%;
     vertical-align: top;
-    padding-left: 1%
 }
