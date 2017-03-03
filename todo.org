@@ -1,5 +1,5 @@
-* define clear word to clear log
-* add let for :doc/:canvas/:exec variables around eval
+* define words for :doc/:canvas/:exec/:in/:out
+** try output empty
 * add undo support
 ** run each command in trans
 ** store trans on commit

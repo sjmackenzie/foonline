@@ -1,5 +1,9 @@
 #canvas {
     border: 1px solid;
+    border-top-color: silver;
+    border-left-color: silver;
+    border-bottom-color: gray;
+    border-right-color: gray;
     border-radius: 0.5em;
     display: inline-block;
     height:99vh;
@@ -8,11 +12,16 @@
 }
 
 #input {
-    border-radius: 0.5em;
     border: 1px solid;
+    border-top-color: gray;
+    border-left-color: gray;
+    border-bottom-color: silver;
+    border-right-color: silver;
+    border-radius: 0.5em;
     font: monospace;
     font-size: 150%;
-    height: 30%;
+    height: 29%;
+    margin-bottom: 1%;
     resize: none;
     width: 100%;
 }
@@ -29,6 +38,7 @@
     display: inline-block;
     height: 99vh;
     margin-right: 1%;
-    width: 49%;
+    width: 48%;
     vertical-align: top;
+    padding-left: 1%
 }
