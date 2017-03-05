@@ -8,6 +8,7 @@ body {
     border: none;
     display: inline-block;
     height:96vh;
+    margin-top: 1px;
     overflow: scroll;
     width: 49.5%;
 }
