@@ -1,22 +1,21 @@
 body {
+    background-color: gray;
     padding: 1%;
 }
 
 #canvas {
+    background-color: whitesmoke;
     border: none;
     display: inline-block;
     height:96vh;
     overflow: scroll;
-    width: 49%;
+    width: 49.5%;
 }
 
 #input {
-    border: 1px solid;
-    border-top-color: gray;
-    border-left-color: gray;
-    border-bottom-color: silver;
-    border-right-color: silver;
-    border-radius: 0.5em;
+    background: whitesmoke;
+    border: none;
+    color: dimgray;
     font: monospace;
     font-size: 150%;
     height: 29%;
@@ -26,7 +25,9 @@ body {
 }
 
 #output {
-    border: none;    
+    background-color: gray;
+    border: none;
+    color: white;
     font: monospace;
     height: 70%;
     resize: none;
@@ -34,9 +35,10 @@ body {
 }
 
 #repl {
+    border: none;
     display: inline-block;
     height: 96vh;
     margin-right: 1%;
-    width: 49%;
     vertical-align: top;
+    width: 49%;
 }

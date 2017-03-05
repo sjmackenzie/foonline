@@ -13,6 +13,6 @@
 ** include www in archive
 
 canvas 
-10 (1 list str swap button rotr html drop) 
-times
+10 (1 list "Button ~a" fmt 
+    swap button rotr html drop) times
 to-html
