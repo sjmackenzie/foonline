@@ -33,15 +33,15 @@
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
            (output (html-textarea (html-br repl) :id :output)))
-      (define-lisp-word :in () (:exec exec)
+      (define-lisp-word :input () (:exec exec)
         (lifoo-push input))
       
-      (define-lisp-word :out () (:exec exec)
+      (define-lisp-word :output () (:exec exec)
         (lifoo-push output))
       
       (setf
        (html-attr input :rows) 5
-       (html-attr output :readonly) t)
+       (html-attr output :readonly) :true)
 
       (html output "Welcome to Foonline,")
       (html output "press Ctrl+Enter to evaluate")
@@ -61,9 +61,18 @@
                  (do-while ((setf line (read-line in nil)))
                    (html output (format nil "~a\\n" line)))
                  (html output "\\n")))
-             
-             (with-input-from-string (in expr)
-               (lifoo-eval (lifoo-read :in in) :exec exec)))
+
+             (handler-case 
+                 (with-input-from-string (in expr)
+                   (let ((out
+                           (with-output-to-string (out)
+                             (with-lifoo (:exec exec :output out)
+                               (lifoo-eval (lifoo-read :in in)
+                                           :exec exec)))))
+                     (unless (string= "" out)
+                       (html output (format nil "~a\\n" out)))))
+               (error (e)
+                 (html output (format nil "~a\\n" e)))))
            (html output
                  (with-output-to-string (out)
                    (lifoo-print (lifoo-pop :exec exec) out)
