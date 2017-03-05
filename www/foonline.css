@@ -6,6 +6,7 @@ body {
 #canvas {
     background-color: whitesmoke;
     border: none;
+    border-radius: 0.1em;
     display: inline-block;
     height:96vh;
     margin-top: 1px;
@@ -15,6 +16,7 @@ body {
 #input {
     background: whitesmoke;
     border: none;
+    border-radius: 0.1em;
     color: dimgray;
     font: monospace;
     font-size: 150%;
