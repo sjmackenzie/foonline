@@ -70,7 +70,7 @@
                                (setf (lifoo-output) out)
                                (lifoo-eval (lifoo-read :in in)))))
                        (unless (string= "" out)
-                         (html output (format nil "~a\\n" out))))))
+                         (html output out)))))
                (error (e)
                  (html output (format nil "~a\\n" e)))))
            (html output
