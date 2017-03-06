@@ -14,6 +14,8 @@ Foonline provides direct real-time access to it's own user interface in the form
 
 ![Controls Example](https://github.com/codr4life/foonline/blob/master/example_controls.png)
 
+![Table Example](https://github.com/codr4life/foonline/blob/master/example_table.png)
+
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
 ### future directions

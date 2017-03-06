@@ -20,11 +20,19 @@ input {
     border-radius: 0.1em;    
 }
 
+th {
+    background-color: gray;
+    color: white;
+    padding-left: 0.2em;
+    text-align: left;
+}
+
 #canvas {
     background-color: whitesmoke;
     border: none;
     border-radius: 0.1em;
     display: inline-block;
+    font-family: verdana, sans-serif;
     height:95vh;
     margin-top: 1px;
     width: 49.5%;
@@ -34,7 +42,7 @@ input {
     background-color: gray;
     border: none;
     color: white;
-    font: monospace;
+    font-family: monospace;
     height: 60%;
     resize: none;
     width: 100%;
@@ -45,7 +53,7 @@ input {
     border: none;
     border-radius: 0.1em;
     color: dimgray;
-    font: monospace;
+    font-family: monospace;
     font-size: 150%;
     height: 40%;
     margin-bottom: 1%;

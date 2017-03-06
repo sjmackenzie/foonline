@@ -1,3 +1,5 @@
+* add table example with custom tag/remove
+
 * add Linux exec
 ** add support for specifying port on command line
 *** sb-ext:*posix-argv*
@@ -28,3 +30,12 @@ canvas
 10 (1 list "Button ~a" fmt 
     swap button rotr text drop) times
       
+canvas "table" tag
+:width style "100%" set drop
+:margin-top style "1em" set drop
+"tr" tag
+"th" tag "foo" text 
+:width style "50%" set drop drop
+"th" tag "bar" text drop 
+drop
+to-html
