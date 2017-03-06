@@ -3,6 +3,24 @@
 *** sb-ext:*posix-argv*
 ** include www in archive
 
+document title 
+empty "example" html
+
+canvas 1 h 
+"example" html drop 
+br
+
+canvas button 
+"click me!" html 
+:font-size style "125%" set
+
+canvas input
+:value attr "abc" set
+
+canvas a
+:href attr "http://www.github.com" set
+"GitHub" html
+
 canvas 
 10 (1 list "Button ~a" fmt 
     swap button rotr html drop) times

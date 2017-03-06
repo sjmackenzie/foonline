@@ -1,6 +1,6 @@
 (defpackage foonline
   (:export start-foonline stop-foonline)
-  (:use cl cl4l-html cl4l-trans cl4l-utils lifoo))
+  (:use cl cl4l-html cl4l-utils lifoo))
 
 (in-package foonline)
 
@@ -32,11 +32,7 @@
 
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
-           (output (html-textarea (html-br repl) :id :output))
-           undo-stack)
-      (define-lisp-word :input () (:exec exec)
-        (lifoo-push input))
-      
+           (output (html-textarea (html-br repl) :id :output)))
       (define-lisp-word :output () (:exec exec)
         (lifoo-push output))
       
@@ -45,7 +41,7 @@
        (html-attr output :readonly) :true)
 
       (html output "Welcome to Foonline,")
-      (html output "press Ctrl+Enter to evaluate")
+      (html output "Ctrl-Enter evaluates")
       (html output "")
       (html-focus input)
       
@@ -53,19 +49,6 @@
        input
        (lambda ()
          (cond
-           ((and
-             (string= "true" (html-param :cl4l-shift-key))
-             (string= "true" (html-param :cl4l-ctrl-key))
-             (string= "90" (html-param :cl4l-key)))
-            (when undo-stack
-              (handler-case
-                  (progn
-                    (rollback :trans (pop undo-stack))
-                    (html output "undo!\\n"))
-                (error (e)
-                  (html output (format nil "~a\\n" e)))))
-            (drop-html-event doc))
-           
            ((and
              (string= "true" (html-param :cl4l-ctrl-key))
              (string= "13" (html-param :cl4l-key)))
@@ -82,15 +65,13 @@
                    (let ((out
                            (with-output-to-string (out)
                              (setf (lifoo-output) out)
-                             (push (lifoo-push-trans)
-                                   undo-stack)
+                             (lifoo-reset)
                              (handler-case
                                  (lifoo-eval
                                   (lifoo-read :in in))
                                (error (e)
                                  (html output (format nil "~a\\n"
-                                                      e))))
-                             (lifoo-pop-trans))))
+                                                      e)))))))
                      (unless (string= "" out)
                        (html output out))))))
              (html output
