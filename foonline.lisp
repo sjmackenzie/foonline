@@ -37,7 +37,7 @@
         (lifoo-push console))
       
       (setf
-       (html-attr input :rows) 5
+       ;(html-attr input :rows) 5
        (html-attr console :readonly) :true)
 
       (html console "Welcome to Foonline,")
