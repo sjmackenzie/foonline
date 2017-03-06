@@ -1,6 +1,6 @@
 (defpackage foonline
   (:export start-foonline stop-foonline)
-  (:use cl cl4l-html cl4l-utils lifoo))
+  (:use cl cl4l-html cl4l-trans cl4l-utils lifoo))
 
 (in-package foonline)
 
@@ -27,12 +27,13 @@
                    :type :text/css
                    :href "foonline.css")
     
-    (define-lisp-word :doc () (:exec exec)
+    (define-lisp-word :document () (:exec exec)
       (lifoo-push doc))
 
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
-           (output (html-textarea (html-br repl) :id :output)))
+           (output (html-textarea (html-br repl) :id :output))
+           undo-stack)
       (define-lisp-word :input () (:exec exec)
         (lifoo-push input))
       
@@ -51,35 +52,54 @@
       (html-onkeydown
        input
        (lambda ()
-         (when (and
-                (string= "true" (html-param :cl4l-ctrl-key))
-                (string= "13" (html-param :cl4l-key)))
-           (lifoo-reset :exec exec)
-           (let ((expr (html-value input)))
-             (with-input-from-string (in expr)
-               (let ((line))
-                 (do-while ((setf line (read-line in nil)))
-                   (html output (format nil "~a\\n" line)))
-                 (html output "\\n")))
-
-             (handler-case 
-                 (with-input-from-string (in expr)
-                   (with-lifoo (:exec exec)
-                     (let ((out
-                             (with-output-to-string (out)
-                               (setf (lifoo-output) out)
-                               (lifoo-eval (lifoo-read :in in)))))
-                       (unless (string= "" out)
-                         (html output out)))))
-               (error (e)
-                 (html output (format nil "~a\\n" e)))))
-           (html output
-                 (with-output-to-string (out)
-                   (lifoo-print (lifoo-pop :exec exec) out)
-                   (write-string "\\n\\n" out)))
-           (html-scroll-bottom output)
-           (html-select-all input)
-           (drop-html-event doc)))))
+         (cond
+           ((and
+             (string= "true" (html-param :cl4l-shift-key))
+             (string= "true" (html-param :cl4l-ctrl-key))
+             (string= "90" (html-param :cl4l-key)))
+            (when undo-stack
+              (handler-case
+                  (progn
+                    (rollback :trans (pop undo-stack))
+                    (html output "undo!\\n"))
+                (error (e)
+                  (html output (format nil "~a\\n" e)))))
+            (drop-html-event doc))
+           
+           ((and
+             (string= "true" (html-param :cl4l-ctrl-key))
+             (string= "13" (html-param :cl4l-key)))
+             (lifoo-reset :exec exec)
+             (let ((expr (html-value input)))
+               (with-input-from-string (in expr)
+                 (let ((line))
+                   (do-while ((setf line (read-line in nil)))
+                     (html output (format nil "~a\\n" line)))
+                   (html output "\\n")))
+               
+               (with-input-from-string (in expr)
+                 (with-lifoo (:exec exec)
+                   (let ((out
+                           (with-output-to-string (out)
+                             (setf (lifoo-output) out)
+                             (push (lifoo-push-trans)
+                                   undo-stack)
+                             (handler-case
+                                 (lifoo-eval
+                                  (lifoo-read :in in))
+                               (error (e)
+                                 (html output (format nil "~a\\n"
+                                                      e))))
+                             (lifoo-pop-trans))))
+                     (unless (string= "" out)
+                       (html output out))))))
+             (html output
+                   (with-output-to-string (out)
+                     (lifoo-print (lifoo-pop :exec exec) :out out)
+                     (write-string "\\n\\n" out)))
+             (html-scroll-bottom output)
+             (html-select-all input)
+             (drop-html-event doc))))))
     
     (let ((canvas (html-div body :id :canvas)))
       (define-lisp-word :canvas () (:exec exec)
