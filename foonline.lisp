@@ -7,12 +7,18 @@
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
 
-(define-fn eval-input (expr
-                       &key exec
-                       console)
+(defstruct (repl)
+  exec input console
+  (history (make-array 32 :adjustable t
+                          :fill-pointer 0))
+  (history-pos -1))
+
+(define-fn eval-input (repl expr)
     ()
+  (vector-push-extend expr (repl-history repl))
+  (setf (repl-history-pos repl) 0)
   (with-input-from-string (in expr)
-    (with-lifoo (:exec exec)
+    (with-lifoo (:exec (repl-exec repl))
       (let ((out
               (with-output-to-string (out)
                 (setf (lifoo-output) out)
@@ -21,34 +27,31 @@
                     (lifoo-eval
                      (lifoo-read :in in))
                   (error (e)
-                    (html console (format nil "~a\\n"
-                                          e)))))))
+                    (html (repl-console repl)
+                          (format nil "~a\\n" e)))))))
         (unless (string= "" out)
-          (html console out)))))
-  (html console
+          (html (repl-console repl) out)))))
+  (html (repl-console repl)
         (with-output-to-string (out)
-          (lifoo-print (lifoo-pop :exec exec) :out out)
+          (lifoo-print (lifoo-pop :exec (repl-exec repl)) :out out)
           (write-string "\\n\\n" out))))
 
-(define-fn handle-input (key
-                         &key alt? ctrl? shift?
-                         exec
-                         input
-                         console)
+(define-fn handle-input (repl key
+                         &key alt? ctrl? shift?)
     ()
   (declare (ignore alt? shift?))
   (cond
     ((and ctrl? (= 13 key))
-     (lifoo-reset :exec exec)
-     (let ((expr (html-value input)))
+     (lifoo-reset :exec (repl-exec repl))
+     (let ((expr (html-value (repl-input repl))))
        (with-input-from-string (in expr)
          (let ((line))
            (do-while ((setf line (read-line in nil)))
-             (html console (format nil "~a\\n" line)))
-           (html console "\\n")))
-       (eval-input expr :exec exec :console console))
-     (html-scroll-bottom console)
-     (html-select-all input)
+             (html (repl-console repl) (format nil "~a\\n" line)))
+           (html (repl-console repl) "\\n")))
+       (eval-input repl expr))
+     (html-scroll-bottom (repl-console repl))
+     (html-select-all (repl-input repl))
      t)
     (t nil)))
 
@@ -58,7 +61,6 @@
                         :call-url "cl4l"))
          (body (html-body doc))
          (exec (lifoo-init nil :exec (make-lifoo))))
-
     (html-script doc :src "jquery.js")
     (html-script doc :src "cl4l.js")
 
@@ -72,9 +74,13 @@
     (define-lisp-word :document () (:exec exec)
       (lifoo-push doc))
 
-    (let* ((repl (html-div body :id :repl))
-           (input (html-textarea repl :id :input))
-           (console (html-textarea (html-br repl) :id :console)))
+    (let* ((repl-div (html-div body :id :repl))
+           (input (html-textarea repl-div :id :input))
+           (console (html-textarea (html-br repl-div)
+                                   :id :console))
+           (repl (make-repl :exec exec
+                            :input input
+                            :console console)))
       (define-lisp-word :console () (:exec exec)
         (lifoo-push console))
       
@@ -89,13 +95,11 @@
        input
        (lambda ()
          (when (handle-input
+                repl
                 (parse-integer (html-param :cl4l-key))
                 :alt? (parse-bool (html-param :cl4l-alt-key))
                 :ctrl? (parse-bool (html-param :cl4l-ctrl-key))
-                :shift? (parse-bool (html-param :cl4l-shift-key))
-                :exec exec
-                :input input
-                :console console)
+                :shift? (parse-bool (html-param :cl4l-shift-key)))
            (drop-html-event doc)))))
     
     (let ((canvas (html-div body :id :canvas)))
