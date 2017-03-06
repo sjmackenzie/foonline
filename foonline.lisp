@@ -1,11 +1,8 @@
 (defpackage foonline
-  (:export start-foonline stop-foonline)
-  (:use cl cl4l-html cl4l-utils lifoo))
+  (:export foonline start-foonline stop-foonline)
+  (:use cl cl4l cl4l-html cl4l-utils lifoo lifoo-thread))
 
 (in-package foonline)
-
-(defparameter *port* 8080)
-(defparameter *root* "~/Andreas/Dev/Lisp/foonline/www/")
 
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
@@ -102,12 +99,30 @@
     (setf (hunchentoot:content-type*) "application/javascript")
     (html-update-script doc)))
 
-(defun start-foonline ()
+(define-fn start-foonline (&key port root) ()
   (setf *server*
         (hunchentoot:start
          (make-instance 'hunchentoot:easy-acceptor
-                        :port *port*
-                        :document-root *root*))))
+                        :access-log-destination nil
+                        :port port
+                        :document-root root))))
 
-(defun stop-foonline ()
+(define-fn stop-foonline () ()
   (hunchentoot:stop *server*))
+
+(define-fn foonline (&key (root "www/")) ()
+  (write-string "Welcome to Foonline,")
+  (terpri)
+  (write-string "please specify server http-port: ")
+  (force-output)
+  (let* ((line (read-line)))
+    (unless (string= "" line)
+      (start-foonline :port (parse-integer line)
+                      :root root)))
+  (terpri)
+  (write-string "Foonline is waiting for your call,")
+  (terpri)
+  (write-string "press Enter to stop server and exit")
+  (force-output)
+  (read-line)
+  (stop-foonline))

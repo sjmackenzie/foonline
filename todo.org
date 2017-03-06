@@ -1,7 +1,8 @@
-* add Linux exec
-** add support for specifying port on command line
-*** sb-ext:*posix-argv*
-** include www in archive
+(ql:quickload "foonline")
+(in-package foonline)
+(sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
+
+* include www in archive
 
 document title 
 empty "example" text
