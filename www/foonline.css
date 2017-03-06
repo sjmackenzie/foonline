@@ -3,6 +3,14 @@ body {
     padding: 1%;
 }
 
+button {
+    background-color: gray;
+    border: 1px solid;
+    border-color: whitesmoke;
+    border-radius: 0.1em;
+    color: white;
+}
+
 h1 {
     font-size: 200%;
 }
@@ -16,7 +24,9 @@ h3 {
 }
 
 input {
+    background-color: whitesmoke;
     border: 1px solid;
+    border-color: gray;
     border-radius: 0.1em;    
 }
 
