@@ -1,5 +1,3 @@
-* add table example with custom tag/remove
-
 * add Linux exec
 ** add support for specifying port on command line
 *** sb-ext:*posix-argv*
