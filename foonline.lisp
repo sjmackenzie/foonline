@@ -13,11 +13,30 @@
   (history-len 0)
   (history-pos 0))
 
+(define-fn load-history (repl) ()
+  (when (probe-file "history")
+    (with-open-file (in "history")
+      (let (str)
+        (do-while ((setf str (read in nil)))
+          (push str (repl-history repl))
+          (incf (repl-history-len repl)))))))
+
+(define-fn write-history (expr) ()
+  (with-open-file (out "history"
+                       :if-exists :append
+                       :if-does-not-exist :create
+                       :direction :output)
+    (write expr :stream out)
+    (terpri out)))
+
 (define-fn eval-input (repl expr)
     ()
-  (push (string-right-trim '(#\NewLine) expr) (repl-history repl))
-  (incf (repl-history-len repl))
-  (setf (repl-history-pos repl) 0)
+  (let ((ex (string-right-trim '(#\NewLine) expr)))
+    (push ex (repl-history repl))
+    (incf (repl-history-len repl))
+    (setf (repl-history-pos repl) 0)
+    (write-history ex))
+  
   (with-input-from-string (in expr)
     (with-lifoo (:exec (repl-exec repl))
       (let ((out
@@ -102,6 +121,8 @@
            (repl (make-repl :exec exec
                             :input input
                             :console console)))
+      (load-history repl)
+      
       (define-lisp-word :console () (:exec exec)
         (lifoo-push console))
       
