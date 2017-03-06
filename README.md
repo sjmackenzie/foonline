@@ -30,6 +30,43 @@ Foonline provides direct real-time access to it's own user interface in the form
 
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
+```
+document title 
+empty "example" text
+
+canvas 1 h 
+"example" text drop 
+br
+
+canvas input
+:value attr "abc" set
+drop drop br
+
+canvas a
+:href attr "http://www.github.com" set drop
+"GitHub" text
+drop br
+
+canvas 
+10 (1 list "Button ~a" fmt 
+    swap button rotr text drop) times
+      
+canvas "table" tag
+:width style "100%" set drop
+:margin-top style "1em" set drop
+"tr" tag
+"th" tag "foo" text 
+:width style "50%" set drop drop
+"th" tag "bar" text drop 
+drop
+to-html
+
+canvas button 
+"click me!" text 
+:font-size style "125%" set drop
+(document "alert('clicked!');" update)@ onclick
+```
+
 ### future directions
 Having programmatic control over the DOM allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment), the next step is to explore that angle and figure out the constraints.
 
