@@ -7,6 +7,51 @@
 (defvar *server*)
 (defvar *docs* (make-hash-table :test 'equal))
 
+(define-fn eval-input (expr
+                       &key exec
+                       console)
+    ()
+  (with-input-from-string (in expr)
+    (with-lifoo (:exec exec)
+      (let ((out
+              (with-output-to-string (out)
+                (setf (lifoo-output) out)
+                (lifoo-reset)
+                (handler-case
+                    (lifoo-eval
+                     (lifoo-read :in in))
+                  (error (e)
+                    (html console (format nil "~a\\n"
+                                          e)))))))
+        (unless (string= "" out)
+          (html console out)))))
+  (html console
+        (with-output-to-string (out)
+          (lifoo-print (lifoo-pop :exec exec) :out out)
+          (write-string "\\n\\n" out))))
+
+(define-fn handle-input (key
+                         &key alt? ctrl? shift?
+                         exec
+                         input
+                         console)
+    ()
+  (declare (ignore alt? shift?))
+  (cond
+    ((and ctrl? (= 13 key))
+     (lifoo-reset :exec exec)
+     (let ((expr (html-value input)))
+       (with-input-from-string (in expr)
+         (let ((line))
+           (do-while ((setf line (read-line in nil)))
+             (html console (format nil "~a\\n" line)))
+           (html console "\\n")))
+       (eval-input expr :exec exec :console console))
+     (html-scroll-bottom console)
+     (html-select-all input)
+     t)
+    (t nil)))
+
 (hunchentoot:define-easy-handler (main :uri "/") ()
   (let* ((doc (html-doc :title "Foonline"
                         :dynamic? t
@@ -33,9 +78,7 @@
       (define-lisp-word :console () (:exec exec)
         (lifoo-push console))
       
-      (setf
-       ;(html-attr input :rows) 5
-       (html-attr console :readonly) :true)
+      (setf (html-attr console :readonly) :true)
 
       (html console "Welcome to Foonline,")
       (html console "Ctrl-Enter evaluates")
@@ -45,39 +88,15 @@
       (html-onkeydown
        input
        (lambda ()
-         (cond
-           ((and
-             (string= "true" (html-param :cl4l-ctrl-key))
-             (string= "13" (html-param :cl4l-key)))
-             (lifoo-reset :exec exec)
-             (let ((expr (html-value input)))
-               (with-input-from-string (in expr)
-                 (let ((line))
-                   (do-while ((setf line (read-line in nil)))
-                     (html console (format nil "~a\\n" line)))
-                   (html console "\\n")))
-               
-               (with-input-from-string (in expr)
-                 (with-lifoo (:exec exec)
-                   (let ((out
-                           (with-output-to-string (out)
-                             (setf (lifoo-output) out)
-                             (lifoo-reset)
-                             (handler-case
-                                 (lifoo-eval
-                                  (lifoo-read :in in))
-                               (error (e)
-                                 (html console (format nil "~a\\n"
-                                                       e)))))))
-                     (unless (string= "" out)
-                       (html console out))))))
-             (html console
-                   (with-output-to-string (out)
-                     (lifoo-print (lifoo-pop :exec exec) :out out)
-                     (write-string "\\n\\n" out)))
-             (html-scroll-bottom console)
-             (html-select-all input)
-             (drop-html-event doc))))))
+         (when (handle-input
+                (parse-integer (html-param :cl4l-key))
+                :alt? (parse-bool (html-param :cl4l-alt-key))
+                :ctrl? (parse-bool (html-param :cl4l-ctrl-key))
+                :shift? (parse-bool (html-param :cl4l-shift-key))
+                :exec exec
+                :input input
+                :console console)
+           (drop-html-event doc)))))
     
     (let ((canvas (html-div body :id :canvas)))
       (define-lisp-word :canvas () (:exec exec)
