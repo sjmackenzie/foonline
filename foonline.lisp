@@ -43,7 +43,7 @@
       (html console "Welcome to Foonline,")
       (html console "Ctrl-Enter evaluates")
       (html console "")
-      (html-focus input)
+      (focus-html input)
       
       (html-onkeydown
        input

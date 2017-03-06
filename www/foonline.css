@@ -35,7 +35,7 @@ input {
     border: none;
     color: white;
     font: monospace;
-    height: 50%;
+    height: 60%;
     resize: none;
     width: 100%;
 }
@@ -47,7 +47,7 @@ input {
     color: dimgray;
     font: monospace;
     font-size: 150%;
-    height: 50%;
+    height: 40%;
     margin-bottom: 1%;
     resize: none;
     width: 100%;
