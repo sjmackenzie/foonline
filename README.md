@@ -5,7 +5,7 @@
 This project is running on a shoestring budget; please consider [helping out](https://www.paypal.me/c4life), every contribution counts.
 
 ### welcome
-Welcome to Foonline, a web-based [Lifoo](https://github.com/codr4life/lifoo) playground. If you can imagine that [HyperCard](https://en.wikipedia.org/wiki/HyperCard), Common Lisp and Forth had a baby together, that might give you an idea of where this train is going. Foonline attempts to fill a perceived void in the space of playful yet powerful tools for creating software.
+Welcome to Foonline, a web-based [Lifoo](https://github.com/codr4life/lifoo) playground. If you can imagine that [HyperCard](https://en.wikipedia.org/wiki/HyperCard), Common Lisp and Forth had a baby together, that might give you an idea of where this train is going. Foonline attempts to fill a perceived void in the space of powerful, higher level tools for creating software.
 
 ### setup
 Besides source, a Linux executable is [provided](https://github.com/codr4life/foonline/blob/master/foonline.tar.gz); running ```running ./foonline``` in the same directory as the included ```wwww``` catalog starts the server.
