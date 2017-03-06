@@ -9,13 +9,14 @@
 
 (defstruct (repl)
   exec input console
-  (history (make-array 32 :adjustable t
-                          :fill-pointer 0))
-  (history-pos -1))
+  (history)
+  (history-len 0)
+  (history-pos 0))
 
 (define-fn eval-input (repl expr)
     ()
-  (vector-push-extend expr (repl-history repl))
+  (push (string-right-trim '(#\NewLine) expr) (repl-history repl))
+  (incf (repl-history-len repl))
   (setf (repl-history-pos repl) 0)
   (with-input-from-string (in expr)
     (with-lifoo (:exec (repl-exec repl))
@@ -39,9 +40,9 @@
 (define-fn handle-input (repl key
                          &key alt? ctrl? shift?)
     ()
-  (declare (ignore alt? shift?))
+  (declare (ignore shift?))
   (cond
-    ((and ctrl? (= 13 key))
+    ((and ctrl? (char= #\Return (code-char key)))
      (lifoo-reset :exec (repl-exec repl))
      (let ((expr (html-value (repl-input repl))))
        (with-input-from-string (in expr)
@@ -52,6 +53,26 @@
        (eval-input repl expr))
      (html-scroll-bottom (repl-console repl))
      (html-select-all (repl-input repl))
+     t)
+    ((and alt? (char= #\n (char-downcase (code-char key))))
+     (let ((pos
+             (if (zerop (repl-history-pos repl))
+                 (setf (repl-history-pos repl)
+                       (1- (repl-history-len repl)))
+                 (decf (repl-history-pos repl)))))
+       (setf (html-value (repl-input repl))
+             (nth pos (repl-history repl)))
+       (html-select-all (repl-input repl)))
+     t)
+    ((and alt? (char= #\p (char-downcase (code-char key))))
+     (let ((pos
+             (if (< (repl-history-pos repl)
+                    (1- (repl-history-len repl)))
+                 (incf (repl-history-pos repl))
+                 (setf (repl-history-pos repl) 0))))
+       (setf (html-value (repl-input repl))
+             (nth pos (repl-history repl)))
+       (html-select-all (repl-input repl)))
      t)
     (t nil)))
 
@@ -86,8 +107,8 @@
       
       (setf (html-attr console :readonly) :true)
 
-      (html console "Welcome to Foonline,")
-      (html console "Ctrl-Enter evaluates")
+      (html console "Welcome to Foonline!")
+      (html console "Ctrl-Enter evaluates, and Alt-p/n navigates history")
       (html console "")
       (focus-html input)
       
@@ -134,9 +155,9 @@
   (hunchentoot:stop *server*))
 
 (define-fn foonline (&key (root "www/")) ()
-  (write-string "Welcome to Foonline,")
+  (write-string "Welcome to Foonline!")
   (terpri)
-  (write-string "please specify server http-port: ")
+  (write-string "Please specify http-server port: ")
   (force-output)
   (let* ((line (read-line)))
     (unless (string= "" line)
@@ -145,7 +166,7 @@
   (terpri)
   (write-string "Foonline is waiting for your call,")
   (terpri)
-  (write-string "press Enter to stop server and exit")
+  (write-string "press Enter to stop server and exit.")
   (force-output)
   (read-line)
   (stop-foonline))
