@@ -32,17 +32,17 @@
 
     (let* ((repl (html-div body :id :repl))
            (input (html-textarea repl :id :input))
-           (output (html-textarea (html-br repl) :id :output)))
-      (define-lisp-word :output () (:exec exec)
-        (lifoo-push output))
+           (console (html-textarea (html-br repl) :id :console)))
+      (define-lisp-word :console () (:exec exec)
+        (lifoo-push console))
       
       (setf
        (html-attr input :rows) 5
-       (html-attr output :readonly) :true)
+       (html-attr console :readonly) :true)
 
-      (html output "Welcome to Foonline,")
-      (html output "Ctrl-Enter evaluates")
-      (html output "")
+      (html console "Welcome to Foonline,")
+      (html console "Ctrl-Enter evaluates")
+      (html console "")
       (html-focus input)
       
       (html-onkeydown
@@ -57,8 +57,8 @@
                (with-input-from-string (in expr)
                  (let ((line))
                    (do-while ((setf line (read-line in nil)))
-                     (html output (format nil "~a\\n" line)))
-                   (html output "\\n")))
+                     (html console (format nil "~a\\n" line)))
+                   (html console "\\n")))
                
                (with-input-from-string (in expr)
                  (with-lifoo (:exec exec)
@@ -70,15 +70,15 @@
                                  (lifoo-eval
                                   (lifoo-read :in in))
                                (error (e)
-                                 (html output (format nil "~a\\n"
-                                                      e)))))))
+                                 (html console (format nil "~a\\n"
+                                                       e)))))))
                      (unless (string= "" out)
-                       (html output out))))))
-             (html output
+                       (html console out))))))
+             (html console
                    (with-output-to-string (out)
                      (lifoo-print (lifoo-pop :exec exec) :out out)
                      (write-string "\\n\\n" out)))
-             (html-scroll-bottom output)
+             (html-scroll-bottom console)
              (html-select-all input)
              (drop-html-event doc))))))
     

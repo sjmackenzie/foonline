@@ -12,17 +12,19 @@ br
 
 canvas button 
 "click me!" html 
-:font-size style "125%" set
+:font-size style "125%" set drop
+(document "alert('clicked!');" update)@ onclick
 
 canvas input
 :value attr "abc" set
+drop drop br
 
 canvas a
-:href attr "http://www.github.com" set
+:href attr "http://www.github.com" set drop
 "GitHub" html
+drop br
 
 canvas 
 10 (1 list "Button ~a" fmt 
     swap button rotr html drop) times
-to-html
       
