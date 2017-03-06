@@ -1,9 +1,3 @@
-* add undo support
-** add trans support to html protocol
-*** forward lifoo trans to functions
-** run each eval in a separate trans
-** store trans in stack on commit
-** add undo word to pop and roll back
 * add Linux exec
 ** add support for specifying port on command line
 *** sb-ext:*posix-argv*
