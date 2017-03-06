@@ -19,7 +19,7 @@ Foonline provides direct real-time access to it's own user interface in the form
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
 ### future directions
-I'm still figuring out the constraints of the initial design. Having programmatic control over the DOM potentially allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment).
+Having programmatic control over the DOM allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment), the next step is to explore that angle and figure out the constraints.
 
 ### ps
 You are perfect, immortal spirit; whole and innocent.<br/>
