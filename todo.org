@@ -2,8 +2,6 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
-* include www in archive
-
 document title 
 empty "example" text
 
