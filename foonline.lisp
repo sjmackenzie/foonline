@@ -15,27 +15,25 @@
   (history-pos 0))
 
 (define-lifoo-init (:foonline) ()
-  (define-word :words () ()
-    canvas table
+  (define-word :word-list (boolean) ()
+    words :words swap set
+    canvas empty table
     :width style "100%" set drop
     :margin-top style "0.5em" set drop
-    caption "words" text drop
+    caption "word list" text drop
     tr
     th "name" text
     :width style "50%" set drop drop
     th "args" text drop 
     th "macro?" text drop
     drop
-    :words (:w swap set drop tr 
-               td :w id str down swap drop text drop
-               td :w args 1 list str down swap drop text drop
-               td :w macro? "yes" "no" if swap drop text drop 
-               drop)@ each
-    $ (:w (:words (lifoo-push
-                   (mapcar #'rest 
-                           (index-first (lifoo-words)))) 
-                  lisp)) 
-    let))
+    :words
+    (:w swap set drop tr 
+     td :w id str down swap drop text drop
+     td :w args 1 list str down swap drop text drop
+     td :w macro? "yes" "no" if swap drop text drop 
+     drop)@ each
+    $ (:words :w) let))
 
 (define-fn load-history (repl) ()
   (when (probe-file "history")
