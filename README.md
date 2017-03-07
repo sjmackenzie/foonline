@@ -48,10 +48,16 @@ Callbacks may be registered for DOM events, changes and updates are automaticall
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
 ```
-canvas button 
-"click me!" text 
-:font-size style "125%" set drop
-(document "alert('clicked!');" update)@ onclick
+canvas
+label "name: " text drop
+input :name swap set
+button 
+  "greet" text 
+  (:name value 1 list "alert('hello ~a!');" fmt
+   document swap update drop)@ onclick
+drop
+$ (:name) let
+to-html
 ```
 
 ### word list

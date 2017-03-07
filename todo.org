@@ -2,9 +2,3 @@
 (start-foonline :port 8080 :root "~/Andreas/Dev/Lisp/foonline/www/")
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
-
-* improve word list
-** improve formatting of args
-*** empty for macros
-*** () if nil for word
-** replace macro column with bold tr?
