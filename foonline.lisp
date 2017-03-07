@@ -23,16 +23,19 @@
     :width style "100%" set drop
     :margin-top style "0.5em" set drop
     tr
-    th "name" text
-    :width style "50%" set drop drop
-    th "args" text drop 
-    th "macro?" text drop
+      th
+        span "macro" text :font-weight style "bold" set drop drop
+        "/word" text
+        :width style "50%" set drop drop
+      th "arguments" text drop 
     drop
     :words
-    (:w swap set drop tr 
+    (:w swap set drop tr
+     :w macro? swap drop (:font-weight style "bold" set drop) when
      td :w id str down swap drop text drop
-     td :w args 1 list str down swap drop text drop
-     td :w macro? "no" "yes" if swap drop text drop 
+     td :w
+       macro? (args "()" (args 1 list str down) if) "" if
+       swap drop text drop
      drop)@ each
     $ (:words :w) let
     drop drop))
