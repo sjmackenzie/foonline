@@ -1,8 +1,3 @@
 (ql:quickload "foonline")
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
-
-* add table support
-** separate html-table type
-** caption
-* write table demo

@@ -24,25 +24,36 @@ button {
     color: white;
 }
 
+caption {
+    font-size: 125%;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-color: gray;
+    margin-bottom: 0.2em;
+}
+
 h1 {
     border-bottom: 1px solid;
-    border-color: gray;
+    border-color: lightgray;
     font-size: 200%;
     letter-spacing: 0.2em;
+    text-color: gray;
 }
 
 h2 {
     border-bottom: 1px dotted;
-    border-color: gray;
+    border-color: lightgray;
     font-size: 175%;
     letter-spacing: 0.1em;
+    text-color: gray;
 }
 
 h3 {
     border-bottom: 1px dotted;
-    border-color: gray;
+    border-color: lightgray;
     font-size: 150%;
     letter-spacing: 0.1em;
+    text-color: gray;
 }
 
 input {
@@ -68,6 +79,7 @@ th {
     height:95vh;
     margin-top: 1px;
     width: 49.5%;
+    overflow: scroll;
 }
 
 #console {

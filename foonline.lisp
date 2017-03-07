@@ -1,6 +1,7 @@
 (defpackage foonline
   (:export foonline start-foonline stop-foonline)
-  (:use cl cl4l cl4l-html cl4l-utils lifoo lifoo-thread))
+  (:use cl cl4l cl4l-html cl4l-index cl4l-utils lifoo
+        lifoo-thread))
 
 (in-package foonline)
 
@@ -12,6 +13,29 @@
   (history)
   (history-len 0)
   (history-pos 0))
+
+(define-lifoo-init (:foonline) ()
+  (define-word :words () ()
+    canvas table
+    :width style "100%" set drop
+    :margin-top style "0.5em" set drop
+    caption "words" text drop
+    tr
+    th "name" text
+    :width style "50%" set drop drop
+    th "args" text drop 
+    th "macro?" text drop
+    drop
+    :words (:w swap set drop tr 
+               td :w id str down swap drop text drop
+               td :w args 1 list str down swap drop text drop
+               td :w macro? "yes" "no" if swap drop text drop 
+               drop)@ each
+    $ (:w (:words (lifoo-push
+                   (mapcar #'rest 
+                           (index-first (lifoo-words)))) 
+                  lisp)) 
+    let))
 
 (define-fn load-history (repl) ()
   (when (probe-file "history")
@@ -136,6 +160,7 @@
       (html-onkeydown
        input
        (lambda ()
+         (in-package foonline)
          (when (handle-input
                 repl
                 (parse-integer (html-param :cl4l-key))
