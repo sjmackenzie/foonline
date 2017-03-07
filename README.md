@@ -32,10 +32,6 @@ canvas
 2 h "bar" text drop
 3 h "baz" text drop
 
-canvas input
-:value attr "abc" set
-drop drop br
-
 canvas a
 :href attr "http://www.github.com" set drop
 "GitHub" text
