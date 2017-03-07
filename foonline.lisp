@@ -28,6 +28,7 @@
         "/word" text
         :width style "50%" set drop drop
       th "arguments" text drop 
+      th "protocol" text drop 
     drop
     :words
     (:w swap set drop
@@ -38,6 +39,7 @@
        td :w
          macro? (args "()" (args 1 list str down) if) "" if
          swap drop text drop
+       td :w protocol 1 list str down swap drop text drop
      drop)@ each
     $ (:words :w) let
     drop drop))

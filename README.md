@@ -21,11 +21,7 @@ press Enter to stop server and exit
 ### basics
 Foonline provides direct real-time access to it's own user interface in the form of a [virtual DOM](https://github.com/codr4life/vicsydev/blob/master/wrap_up_virtual_dom.md) interfaced from [Lifoo](https://github.com/codr4life/lifoo). The way this works is by running [Lifoo](https://github.com/codr4life/lifoo) inside of a Common Lisp server that publishes the same DOM to the browser and [Lifoo](https://github.com/codr4life/lifoo). Any method that [Lifoo](https://github.com/codr4life/lifoo) supports may be used to modify the document, the spell for emptying the console (```console empty```) may also be used to empty any other UI element. Each page load starts a new session, and each new session inherits the combined history from all that came before.
 
-![Title Example](https://github.com/codr4life/foonline/blob/master/example_title.png)
-
-![Controls Example](https://github.com/codr4life/foonline/blob/master/example_controls.png)
-
-![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
+![Basics Example](https://github.com/codr4life/foonline/blob/master/example_basics.png)
 
 ```
 document title 
@@ -35,7 +31,6 @@ canvas
 1 h "foo" text drop 
 2 h "bar" text drop
 3 h "baz" text drop
-br
 
 canvas input
 :value attr "abc" set
@@ -45,21 +40,14 @@ canvas a
 :href attr "http://www.github.com" set drop
 "GitHub" text
 drop br
+```
 
-canvas 
-10 (1 list "Button ~a" fmt 
-    swap button rotr text drop) times
-      
-canvas "table" tag
-:width style "100%" set drop
-:margin-top style "1em" set drop
-"tr" tag
-"th" tag "foo" text 
-:width style "50%" set drop drop
-"th" tag "bar" text drop 
-drop
-to-html
+### callbacks
+Callbacks may be registered for DOM events, changes and updates are automatically piggy-backed on top of requests and responses.
 
+![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
+
+```
 canvas button 
 "click me!" text 
 :font-size style "125%" set drop
@@ -67,9 +55,9 @@ canvas button
 ```
 
 ### word list
-Included below is an example of, and the source code for the word list; accessible by evaluating ```nil word-list```, passing ```t``` type-checks the list against the current stack.
+Included below is a screen shot of, and the source code for the word list; accessible by evaluating ```nil word-list```, passing ```t``` type-checks words against current stack contents.
 
-![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
+![Word List Example](https://github.com/codr4life/foonline/blob/master/example_word_list.png)
 
 ```
 words :words swap set drop
@@ -93,6 +81,7 @@ drop
    td :w
      macro? (args "()" (args 1 list str down) if) "" if
      swap drop text drop
+   td :w protocol 1 list str down swap drop text drop
  drop)@ each
 $ (:words :w) let
 drop drop
