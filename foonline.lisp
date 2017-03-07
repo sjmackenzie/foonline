@@ -50,7 +50,7 @@
                        :if-exists :append
                        :if-does-not-exist :create
                        :direction :output)
-    (write expr :stream out)
+    (print expr out)
     (terpri out)))
 
 (define-fn eval-input (repl expr)
