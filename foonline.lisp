@@ -16,7 +16,7 @@
 
 (define-lifoo-init (:foonline) ()
   (define-word :word-list (boolean) ()
-    words :words swap set
+    words :words swap set drop
     canvas empty
     1 h "word list" text drop
     table
@@ -34,7 +34,8 @@
      td :w args 1 list str down swap drop text drop
      td :w macro? "no" "yes" if swap drop text drop 
      drop)@ each
-    $ (:words :w) let))
+    $ (:words :w) let
+    drop drop))
 
 (define-fn load-history (repl) ()
   (when (probe-file "history")

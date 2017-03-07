@@ -72,7 +72,7 @@ Included below is an example of, and the source code for the word list; accessib
 ![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
 
 ```
-words :words swap set
+words :words swap set drop
 canvas empty
 1 h "word list" text drop
 table
@@ -91,6 +91,7 @@ drop
  td :w macro? "no" "yes" if swap drop text drop 
  drop)@ each
 $ (:words :w) let
+drop drop
 ```
 
 ### future directions
