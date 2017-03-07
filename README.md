@@ -67,7 +67,7 @@ canvas button
 ```
 
 ### word list
-Included below is an example of, and the source code for the word table; accessible by evaluating ```nil word-list```, passing ```t``` type-checks the list against the current stack.
+Included below is an example of, and the source code for the word list; accessible by evaluating ```nil word-list```, passing ```t``` type-checks the list against the current stack.
 
 ![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
 
