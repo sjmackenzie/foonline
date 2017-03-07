@@ -19,7 +19,7 @@ press Enter to stop server and exit
 ```
 
 ### basics
-Foonline provides direct real-time access to it's own user interface in the form of a [virtual DOM](https://github.com/codr4life/vicsydev/blob/master/wrap_up_virtual_dom.md) interfaced from [Lifoo](https://github.com/codr4life/lifoo). The way this works is by running [Lifoo](https://github.com/codr4life/lifoo) inside of a Common Lisp server that publishes the same DOM to the browser and [Lifoo](https://github.com/codr4life/lifoo). Any method that [Lifoo](https://github.com/codr4life/lifoo) supports may be used to modify the document, the spell for emptying the console (```console empty```) may also be used to empty any other UI element. Each page load starts a new session.
+Foonline provides direct real-time access to it's own user interface in the form of a [virtual DOM](https://github.com/codr4life/vicsydev/blob/master/wrap_up_virtual_dom.md) interfaced from [Lifoo](https://github.com/codr4life/lifoo). The way this works is by running [Lifoo](https://github.com/codr4life/lifoo) inside of a Common Lisp server that publishes the same DOM to the browser and [Lifoo](https://github.com/codr4life/lifoo). Any method that [Lifoo](https://github.com/codr4life/lifoo) supports may be used to modify the document, the spell for emptying the console (```console empty```) may also be used to empty any other UI element. Each page load starts a new session, and each new session inherits the combined history from all that came before.
 
 ![Title Example](https://github.com/codr4life/foonline/blob/master/example_title.png)
 
