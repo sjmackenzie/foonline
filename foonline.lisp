@@ -14,7 +14,7 @@
   (history-len 0)
   (history-pos 0))
 
-(define-lifoo-init (:foonline) ()
+(define-protocol (:foonline) ()
   (define-word :word-list (boolean) ()
     words :words swap set drop
     canvas empty
