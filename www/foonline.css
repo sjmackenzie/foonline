@@ -1,3 +1,16 @@
+a:hover, a:visited, a:link, a:active {
+    border-bottom: 1px dotted;
+    border-radius: 0.1em;
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: gray;
+    border-bottom: none;
+    color: white;
+}
+
 body {
     background-color: gray;
     padding: 1%;
@@ -12,15 +25,24 @@ button {
 }
 
 h1 {
+    border-bottom: 1px solid;
+    border-color: gray;
     font-size: 200%;
+    letter-spacing: 0.2em;
 }
 
 h2 {
+    border-bottom: 1px dotted;
+    border-color: gray;
     font-size: 175%;
+    letter-spacing: 0.1em;
 }
 
 h3 {
+    border-bottom: 1px dotted;
+    border-color: gray;
     font-size: 150%;
+    letter-spacing: 0.1em;
 }
 
 input {

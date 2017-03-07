@@ -176,8 +176,6 @@
   (hunchentoot:stop *server*))
 
 (define-fn foonline (&key (root "www/")) ()
-  (write-string "Welcome to Foonline!")
-  (terpri)
   (write-string "Please specify http-server port: ")
   (force-output)
   (let* ((line (read-line)))

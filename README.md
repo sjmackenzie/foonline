@@ -12,8 +12,7 @@ Besides source, a Linux executable is [provided](https://github.com/codr4life/fo
 
 ```
 ~/Andreas/Dev/Lisp/foonline > ./foonline 
-Welcome to Foonline,
-please specify server http-port: 8080
+Please specify server http-port: 8080
 
 Foonline is waiting for your call,
 press Enter to stop server and exit
@@ -34,8 +33,10 @@ Foonline provides direct real-time access to it's own user interface in the form
 document title 
 empty "example" text
 
-canvas 1 h 
-"example" text drop 
+canvas 
+1 h "foo" text drop 
+2 h "bar" text drop
+3 h "baz" text drop
 br
 
 canvas input
@@ -68,7 +69,7 @@ canvas button
 ```
 
 ### future directions
-Having programmatic control over the DOM allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment), the next step is to explore that angle and figure out the constraints.
+Having programmatic control over the DOM allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment), the next step is to explore that angle and figure out the constraints. I'm also working on a database layer for basic persistence and indexing of data.
 
 ### ps
 You are perfect, immortal spirit; whole and innocent.<br/>
