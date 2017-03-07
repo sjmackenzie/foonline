@@ -67,7 +67,7 @@ canvas button
 ```
 
 ### word dictionary
-Included below is an example of, and the source code for the word table, accessible by evaluating 'words'. The variable ```words``` is initialized by a Lisp expression since the word dictionary isn't directly accessible from within Lifoo, which shows how easy it is to escape the cage when needed.
+Included below is an example of, and the source code for the word table; accessible by evaluating 'words'. The variable ```words``` is initialized by a Lisp expression since the word dictionary isn't directly accessible from within Lifoo, which illustrates how easy it is to reach the outside world if needed.
 
 ![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
 
