@@ -39,7 +39,7 @@ drop br
 ```
 
 ### callbacks
-Callbacks may be registered for DOM events, changes and updates are automatically piggy-backed on top of requests and responses.
+Callbacks may be registered for DOM events, changes are automatically piggy-backed on top of requests and responses.
 
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
