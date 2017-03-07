@@ -27,8 +27,6 @@ Foonline provides direct real-time access to it's own user interface in the form
 
 ![Events Example](https://github.com/codr4life/foonline/blob/master/example_events.png)
 
-![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
-
 ```
 document title 
 empty "example" text
@@ -66,6 +64,33 @@ canvas button
 "click me!" text 
 :font-size style "125%" set drop
 (document "alert('clicked!');" update)@ onclick
+```
+
+### word dictionary
+Included below is an example of, and the source code for the word table, accessible by evaluating 'words'.
+
+![Words Example](https://github.com/codr4life/foonline/blob/master/example_words.png)
+
+```
+canvas table
+:width style "100%" set drop
+:margin-top style "0.5em" set drop
+caption "words" text drop
+tr
+th "name" text
+:width style "50%" set drop drop
+th "args" text drop 
+th "macro?" text drop
+drop
+:words (:w swap set drop tr 
+        td :w id str down swap drop text drop
+        td :w args 1 list str down swap drop text drop
+        td :w macro? "yes" "no" if swap drop text drop 
+        drop)@ each
+$ (:w (:words (lifoo-push
+                (mapcar #'rest 
+                        (index-first (lifoo-words)))) lisp)) 
+let
 ```
 
 ### future directions
