@@ -86,12 +86,13 @@ tr
   th "arguments" text drop 
 drop
 :words
-(:w swap set drop tr
- :w macro? swap drop (:font-weight style "bold" set drop) when
- td :w id str down swap drop text drop
- td :w
-   macro? (args "()" (args 1 list str down) if) "" if
-   swap drop text drop
+(:w swap set drop 
+ tr
+   :w macro? swap drop (:font-weight style "bold" set drop) when
+   td :w id str down swap drop text drop
+   td :w
+     macro? (args "()" (args 1 list str down) if) "" if
+     swap drop text drop
  drop)@ each
 $ (:words :w) let
 drop drop
