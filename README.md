@@ -88,7 +88,7 @@ drop
 (:w swap set drop tr 
  td :w id str down swap drop text drop
  td :w args 1 list str down swap drop text drop
- td :w macro? "yes" "no" if swap drop text drop 
+ td :w macro? "no" "yes" if swap drop text drop 
  drop)@ each
 $ (:words :w) let
 ```
