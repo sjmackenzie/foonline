@@ -17,10 +17,11 @@
 (define-lifoo-init (:foonline) ()
   (define-word :word-list (boolean) ()
     words :words swap set
-    canvas empty table
+    canvas empty
+    1 h "word list" text drop
+    table
     :width style "100%" set drop
     :margin-top style "0.5em" set drop
-    caption "word list" text drop
     tr
     th "name" text
     :width style "50%" set drop drop
