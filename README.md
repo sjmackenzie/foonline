@@ -1,11 +1,11 @@
 # foonline
-#### a web-based development environment based on Lifoo
+#### a web-based Lifoo IDE
 
 ### support
 This project is running on a shoestring budget; please consider [helping out](https://www.paypal.me/c4life), every contribution counts.
 
 ### welcome
-Welcome to Foonline, a web-based development environment based on [Lifoo](https://github.com/codr4life/lifoo). If you can imagine that [HyperCard](https://en.wikipedia.org/wiki/HyperCard), Common Lisp and Forth had a baby together, that might give you an idea of where this train is going. Foonline attempts to fill a perceived void in the space of powerful, higher level tools for creating custom software.
+Welcome to Foonline, a web-based [Lifoo](https://github.com/codr4life/lifoo) IDE. If you can imagine that [HyperCard](https://en.wikipedia.org/wiki/HyperCard), Common Lisp and Forth had a baby together, that might give you an idea of where this train is going. Foonline attempts to fill a perceived void in the space of powerful, higher level tools for creating custom software.
 
 ### setup
 Besides source, a Linux executable is [provided](https://github.com/codr4life/foonline/blob/master/foonline.tar.gz); running ```running ./foonline``` in the same directory as the included ```wwww``` catalog starts the server.

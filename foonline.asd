@@ -1,5 +1,5 @@
 (asdf:defsystem foonline
-  :description "a web-based development environment based on Lifoo"
+  :description "a web-based Lifoo IDE"
   :author "Andreas <codr4life@gmail.com>"
   :license "MIT"
   :depends-on (:hunchentoot :lifoo)
