@@ -13,7 +13,9 @@
 "~/db" db
 :rc-tbl (rc-id)@ table set drop
 :rc-name-idx (rc-name)@ index set drop
-:rc-tbl subscribe :rc-name-idx drop
-:rc-tbl (:name "foo") make-rc upsert drop
+:rc-tbl 
+  :rc-name-idx subscribe
+  (:name "foo") make-rc upsert 
+drop
 :rc-name-idx "foo" find
 $ (:rc-name-idx :rc-tbl) let
