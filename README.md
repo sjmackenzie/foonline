@@ -89,9 +89,6 @@ $ (:words :w) let
 drop drop
 ```
 
-### future directions
-Having programmatic control over the DOM allows implementing multi-view applications in combination with the [global environment](https://github.com/codr4life/lifoo#environment), the next step is to explore that angle and figure out the constraints. I'm also working on a database layer for basic persistence and indexing of data.
-
 ### ps
 You are perfect, immortal spirit; whole and innocent.<br/>
 All is forgiven and released.
