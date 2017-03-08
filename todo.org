@@ -8,7 +8,6 @@
 ** add index len word
 ** add index find word
 ** add subscribe word
-** add index demo to readme
 
 * add login demo
 ** user table
