@@ -3,10 +3,6 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
-* add table set operations
-** add demo with (dup)@ key and numbers / strings
-** add demo with lists and (first)@ key
-
 * add index support
 ** add index word
 ** add index len word
@@ -22,11 +18,11 @@
 ((id uuid) name (capac 1)) :rc struct
 "db/" db
 (rc-id)@ table 
-  "rc.tbl" open
+  "rc.tbl" open slurp
   :rc-tbl swap set 
 drop
 (rc-name)@ index
-  "rc-name.idx" open
+  "rc-name.idx" open slurp
   :rc-name-idx swap set 
 drop
 :rc-tbl 
