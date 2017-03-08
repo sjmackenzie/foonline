@@ -3,6 +3,7 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
+* add support for nil key in table word
 * add index word
 * add index len word
 * add index find word
