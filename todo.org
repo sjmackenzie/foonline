@@ -3,16 +3,25 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
+* debug
+
+((id "missing id" error) name) :prod struct
+"~/db" db
+"prods.tbl" (prod-id)@ table
+  (:id 42 :name "foo") make-prod upsert
+  42 find
+
 * add index word
-* add subscribe word
-* add table upsert word
+* add index len word
 * add index find word
-* add db io support
+* add subscribe word
 
 ((id uuid) name (capac 1)) :rc struct
 "~/db" db
-:rc-tbl (rc-id)@ table set drop
-:rc-name-idx (rc-name)@ index set drop
+"rc.tbl" (rc-id)@ table 
+  :rc-tbl swap set drop
+"rc-name.idx" (rc-name)@ index
+  :rc-name-idx swap set drop
 :rc-tbl 
   :rc-name-idx subscribe
   (:name "foo") make-rc upsert 
