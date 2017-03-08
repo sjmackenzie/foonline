@@ -142,7 +142,8 @@
                    :type :text/css
                    :href "foonline.css")
     
-    (define-lisp-word :document () (:exec exec)
+    (define-lisp-word :document () (:exec exec
+                                    :protocol '(:foonline))
       (lifoo-push doc))
 
     (let* ((repl-div (html-div body :id :repl))
@@ -154,7 +155,8 @@
                             :console console)))
       (load-history repl)
       
-      (define-lisp-word :console () (:exec exec)
+      (define-lisp-word :console () (:exec exec
+                                     :protocol '(:foonline))
         (lifoo-push console))
       
       (setf (html-attr console :readonly) :true)
@@ -177,7 +179,8 @@
            (drop-html-event doc)))))
     
     (let ((canvas (html-div body :id :canvas)))
-      (define-lisp-word :canvas () (:exec exec)
+      (define-lisp-word :canvas () (:exec exec
+                                    :protocol '(:foonline))
         (lifoo-push canvas)))
     
     (setf (gethash (html-doc-id doc) *docs*) doc)
