@@ -3,12 +3,6 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
-* add get/set support for symbols
-** replaces var
-** update tests/readme
-* push db-close to lifoo-scope
-* add table word
-* ---
 * add index word
 * add subscribe word
 * add table upsert word
