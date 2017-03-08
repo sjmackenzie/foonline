@@ -3,6 +3,14 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
+* push db-close to lifoo-scope
+* add table word
+* add index word
+* add subscribe word
+* add table upsert word
+* add index find word
+* add db io support
+
 ((id uuid) name (capac 1)) :rc struct
 "~/db" db
 :rc-tbl (rc-id)@ table set drop
