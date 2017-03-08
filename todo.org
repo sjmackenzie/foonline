@@ -3,7 +3,9 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
-* add support for nil key in table word
+* add table set operations
+** add demo with (dup)@ key and numbers / strings
+** add demo with lists and (first)@ key
 
 * add index support
 ** add index word
