@@ -2,3 +2,13 @@
 (start-foonline :port 8080 :root "~/Andreas/Dev/Lisp/foonline/www/")
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
+
+* add db init
+
+((id uuid) name (capac 1)) :rc struct
+:rc-tbl (rc-id)@ table set drop
+:rc-name-idx (rc-name)@ index set drop
+:rc-tbl subscribe :rc-name-idx drop
+:rc-tbl (:name "foo") make-rc upsert drop
+:rc-name-idx "foo" find
+$ (:rc-name-idx :rc-tbl) let
