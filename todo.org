@@ -14,12 +14,21 @@
 ** add subscribe word
 ** add index demo to readme
 
+* add login demo
+** user table
+** name/password input
+** login button
+
 ((id uuid) name (capac 1)) :rc struct
 "db/" db
-"rc.tbl" (rc-id)@ table 
-  :rc-tbl swap set drop
-"rc-name.idx" (rc-name)@ index
-  :rc-name-idx swap set drop
+(rc-id)@ table 
+  "rc.tbl" open
+  :rc-tbl swap set 
+drop
+(rc-name)@ index
+  "rc-name.idx" open
+  :rc-name-idx swap set 
+drop
 :rc-tbl 
   :rc-name-idx subscribe
   (:name "foo") make-rc upsert 
