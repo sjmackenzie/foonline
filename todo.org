@@ -26,7 +26,7 @@ drop
 drop
 :rc-tbl 
   :rc-name-idx subscribe
-  (:name "foo") make-rc upsert 
+  "foo" (:name "foo") make-rc put drop 
 drop
-:rc-name-idx "foo" find
+:rc-name-idx "foo" get
 $ (:rc-name-idx :rc-tbl) let
