@@ -3,6 +3,8 @@
 (in-package foonline)
 (sb-ext:save-lisp-and-die "foonline" :toplevel #'foonline :executable t)
 
+* add html table each/map words
+
 * add index support
 ** add index word
 ** add index len word
